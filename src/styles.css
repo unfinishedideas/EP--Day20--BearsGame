@@ -1,0 +1,15 @@
+.displayBox {
+  display: none;
+}
+
+.controls {
+  display: none;
+}
+
+#greetingTag {
+  display: none;
+}
+
+#deathTag {
+  display: none;
+}

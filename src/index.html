@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Bears Games</title>
+  </head>
+  <body>
+    <form class="bearForm">
+      <label for="name">Your Bear's Name: </label>
+      <input type="text" id="name">
+      <button type="submit" name="button">Submit</button>
+    </form>
+
+    <div class="displayBox">
+      <h2 class="bearName"><!-- Bears name goes here --></h2>
+      <h3>Sleep: <span id="bearSleep"><!-- Bears name goes here --></span> </h3>
+      <h3>Attention: <span id="bearAttention"><!-- Bears name goes here --></span></h3>
+      <h3>Hunger: <span id="bearHunger"><!-- Bears name goes here --></span></h3>
+    </div>
+
+    <div class="controls">
+      <button type="button" id="sleepBtn">Sleep</button>
+      <button type="button" id="attentionBtn">Attention</button>
+      <button type="button" id="feedBtn">Feed</button>
+      <button type="button" id="greetingBtn">Greeting</button>
+    </div>
+
+    <h1 id="greetingTag">Hi! Name name is <span class="bearName"></span></h1>
+
+    <h1 id="deathTag">Oh no!</h1>
+
+  </body>
+</html>
