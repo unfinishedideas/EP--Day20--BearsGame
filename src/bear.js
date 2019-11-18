@@ -10,11 +10,36 @@ export class Bear {
     return "Hi! My name is " + this.name + "!";
   }
   slowlyDie(){
-    this.hunger --;
-    this.attention --;
-    this.sleep --;
+    setInterval(() => {
+      this.hunger --;
+      this.attention --;
+      this.sleep --;
+    }, 1000);
   }
-  feedBear(){
+
+  bearStarves(){
+    if (this.hunger > 0) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+  bearStroke(){
+    if (this.sleep > 0) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+  bearBored(){
+    if (this.attention > 0) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  feed(){
     this.hunger = 20;
   }
   giveAttention(){

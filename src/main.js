@@ -4,10 +4,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles.css';
 import { Bear } from './bear.js';
 
-
 $(document).ready(function(){
   let newBear;
-  let intervalId;
+  let variable;
 
   $(".bearForm").submit(function(event){
     event.preventDefault();
@@ -21,53 +20,47 @@ $(document).ready(function(){
     $(".displayBox").show();
     $(".controls").show();
     $(".bearForm").hide();
-    startLiving(newBear);
+    newBear.slowlyDie();
+    healthCheck(newBear);
   });
 
   $("#feedBtn").click(function(){
-    newBear.hunger = 20;
+    newBear.feed();
     updateScreens(newBear);
   });
 
   $("#sleepBtn").click(function(){
-    newBear.sleep = 20;
+    newBear.letSleep();
     updateScreens(newBear);
   });
 
   $("#attentionBtn").click(function(){
-    newBear.attention = 20;
+    newBear.giveAttention();
     updateScreens(newBear);
   });
 
   $("#greetingBtn").click(function(){
-    $("#greetingTag").show();
+    $("#greetingTag").text(newBear.sayHello()).show();
     setTimeout(function(){
       $("#greetingTag").hide();
     }, 5000);
   });
 
+  let healthCheck = (bear) => {
+    variable = setInterval(updateScreens, 1000, bear);
+  };
+
   function updateScreens(bear){
+    if ((bear.bearStarves()===true)||(bear.bearStroke()===true)||(bear.bearBored()===true)){
+      deathText();
+      clearInterval(variable);
+    }
     $("#bearSleep").text(bear.sleep);
     $("#bearAttention").text(bear.attention);
     $("#bearHunger").text(bear.hunger);
   }
 
-  function startLiving(bear){
-    intervalId = setInterval(dyingBear, 250, bear);
-  }
-
-  function dyingBear(bear){
-    bear.hunger --;
-    bear.sleep --;
-    bear.attention --;
-    if ((bear.hunger < 1) || (bear.sleep < 1) || (bear.attention < 1)) {
-      clearInterval(intervalId);
-      deathText(bear);
-    }
-    updateScreens(bear);
-  }
-
-  function deathText(bear) {
+  function deathText() {
     $(".displayBox").hide();
     $(".controls").hide();
     $("#deathTag").show();
