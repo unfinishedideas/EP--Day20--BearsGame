@@ -52,8 +52,10 @@ $(document).ready(function(){
   function updateBears(bearpen){
     bearpen.bearArray.forEach(function(bear){
       if ((bear.bearStarves()===true)||(bear.bearStroke()===true)||(bear.bearBored()===true)){
-        bear.alive = false;
+        deadBears(bear);
+        bearpen.destroyBear(bear.id);
         $(".displayBox#"+bear.id).hide();
+        $(".deadBears").show();
       } else {
         $("#bearSleep"+bear.id).text(bear.sleep);
         $("#bearAttention"+bear.id).text(bear.attention);
@@ -88,13 +90,9 @@ $(document).ready(function(){
   let healthCheck = (bearpen) => {
     variable = setInterval(updateBears, 1000, bearpen);
   };
-
-  // function deathText() {
-  //   $(".deadBears").show();
-  //   $(".displayBox").hide();
-  //   $(".controls").hide();
-  //   $("#deathTag").show();
-  // }
+  function deadBears(bear){
+        $("#deadBearsList").append("<li>"+bear.name+"</li>");
+  }
 
 });
 

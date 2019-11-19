@@ -21,5 +21,16 @@ export class Bearpen {
     }
     return false;
   }
+  destroyBear(id){
+    for (var i=0; i<this.bearArray.length; i++){
+      if (this.bearArray[i]) {
+        if (this.bearArray[i].id == id) {
+          this.bearArray.splice(i, 1);
+          return true;
+        }
+      }
+    }
+    return false;
+  }
 
 } // close class

@@ -15,15 +15,15 @@ li {
 ul {
   list-style-type: none;
 }
+em {
+  text-decoration: underline;
+}
 .displayBox img {
   height: 200px;
   max-width: auto;
   margin-left: 15%;
 }
 
-.deadBears {
-  display: none;
-}
 .jumbotron {
   text-align: center;
   background-color:rgba(100, 100, 130, 1);
@@ -33,7 +33,9 @@ ul {
   text-shadow: 2px 2px 2px black;
   font-variant: small-caps;
 }
-
+.deadBears {
+  display:none;
+}
 .displayBox {
   color: white;
   margin: 20px;
@@ -42,6 +44,7 @@ ul {
   padding: 20px;
   border-radius: 20px;
   background-color: rgba(100, 100, 130, 1);
+  float: left;
 }
 .scaryText{
   color:red;

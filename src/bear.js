@@ -20,6 +20,7 @@ export class Bear {
 
   bearStarves(){
     if (this.hunger > 0) {
+      this.alive = false;
       return false;
     } else {
       return true;
@@ -27,6 +28,7 @@ export class Bear {
   }
   bearStroke(){
     if (this.sleep > 0) {
+      this.alive = false;
       return false;
     } else {
       return true;
@@ -34,6 +36,7 @@ export class Bear {
   }
   bearBored(){
     if (this.attention > 0) {
+      this.alive = false;
       return false;
     } else {
       return true;
