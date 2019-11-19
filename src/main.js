@@ -3,6 +3,7 @@ import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles.css';
 import { Bear } from './bear.js';
+// import { logSomeStuff } from './apicalls.js';
 
 $(document).ready(function(){
   let newBear;
@@ -22,6 +23,26 @@ $(document).ready(function(){
     $(".bearForm").hide();
     newBear.slowlyDie();
     healthCheck(newBear);
+
+    //API Stuff
+    let request = new XMLHttpRequest();
+    let randoPoke = Math.floor(Math.random() * (200 - 1) + 1);
+    const url = `http://pokeapi.co/api/v2/pokemon/${randoPoke}/`;
+
+    request.onreadystatechange = function() {
+      if (this.readyState === 4 && this.status === 200) {
+        const response = JSON.parse(this.responseText);
+        getElements(response);
+      }
+    };
+    request.open("GET", url, true);
+    request.send();
+
+    const getElements = function(response) {
+      $('.bearImg').prepend('<img id="theImg" src="'+response.sprites.front_default+'" />');
+    };
+
+
   });
 
   $("#feedBtn").click(function(){
