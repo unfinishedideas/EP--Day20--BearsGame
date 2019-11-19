@@ -5,32 +5,34 @@
     <title>Bears Games</title>
   </head>
   <body>
+    <div class="container">
+      <div class="jumbotron">
+        <h1>Bearenheit 51</h1>
+      </div>
     <form class="bearForm">
       <label for="name">Your Bear's Name: </label>
+      <br>
       <input type="text" id="name">
       <button type="submit" name="button">Submit</button>
     </form>
 
-    <div class="displayBox">
-      <h2 class="bearName"><!-- Bears name goes here --></h2>
-      <div class="bearImg">
-        
-      </div>
-      <h3>Sleep: <span id="bearSleep"><!-- Bears name goes here --></span> </h3>
-      <h3>Attention: <span id="bearAttention"><!-- Bears name goes here --></span></h3>
-      <h3>Hunger: <span id="bearHunger"><!-- Bears name goes here --></span></h3>
+    <div class="BearsBox">
+      <ul id="liveBearsList">
+
+      </ul>
     </div>
 
-    <div class="controls">
-      <button type="button" id="sleepBtn">Sleep</button>
-      <button type="button" id="attentionBtn">Attention</button>
-      <button type="button" id="feedBtn">Feed</button>
-      <button type="button" id="greetingBtn">Greeting</button>
+    <h1 id="deathTag">Oh no! You let <img src="./skull.png" alt=""> <span class="bearName"></span> die!</h1>
+
+    <div class="deadBears">
+      <h2>Fallen Bears</h2>
+      <ul>
+        <!-- Example Bears
+        <li>Barry. Died of Stroke</li>
+        <li>Terry, Died of Hunger</li> -->
+      </ul>
     </div>
 
-    <h1 id="greetingTag"><span class="bearName"></span></h1>
-
-    <h1 id="deathTag">Oh no! You let <span class="bearName"></span> die!</h1>
-
+  </div>
   </body>
 </html>

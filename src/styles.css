@@ -1,12 +1,62 @@
-.displayBox {
+body{
+  background-color: rgb(146, 207, 18);
+}
+button {
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+label {
+  font-variant: small-caps;
+  font-size: 30px;
+}
+li {
+  font-size: 25px;
+}
+ul {
+  list-style-type: none;
+}
+.displayBox img {
+  height: 200px;
+  max-width: auto;
+  margin-left: 15%;
+}
+
+.deadBears {
   display: none;
+}
+.jumbotron {
+  text-align: center;
+  background-color:rgba(100, 100, 130, 1);
+  color: white;
+  border: 2px solid black;
+  border-radius: 20px;
+  text-shadow: 2px 2px 2px black;
+  font-variant: small-caps;
+}
+
+.displayBox {
+  color: white;
+  margin: 20px;
+  border: 2px solid black;
+  max-width: 30%;
+  padding: 20px;
+  border-radius: 20px;
+  background-color: rgba(100, 100, 130, 1);
+}
+.scaryText{
+  color:red;
 }
 
 .controls {
   display: none;
 }
+.bearName{
+  color: white;
+  text-shadow: 2px 2px 2px black;
+  font-variant: small-caps;
+}
 
-#greetingTag {
+.greetingTag {
   display: none;
 }
 

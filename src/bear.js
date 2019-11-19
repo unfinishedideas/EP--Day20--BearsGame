@@ -5,6 +5,7 @@ export class Bear {
     this.attention = 20;
     this.sleep = 20;
     this.alive = true;
+    this.imgLink;
   }
   sayHello(){
     return "Hi! My name is " + this.name + "!";

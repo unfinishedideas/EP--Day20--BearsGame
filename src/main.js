@@ -3,26 +3,22 @@ import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles.css';
 import { Bear } from './bear.js';
-// import { logSomeStuff } from './apicalls.js';
+import { Bearpen } from './bearpen.js';
 
 $(document).ready(function(){
   let newBear;
   let variable;
+  let newBearpen = new Bearpen();
 
+  // On submit! --------------------------------------------
   $(".bearForm").submit(function(event){
     event.preventDefault();
     newBear = new Bear($("#name").val());
+    newBearpen.addBear(newBear);
 
-    $(".bearName").text(newBear.name);
-    $("#bearSleep").text(newBear.sleep);
-    $("#bearAttention").text(newBear.attention);
-    $("#bearHunger").text(newBear.hunger);
-
-    $(".displayBox").show();
-    $(".controls").show();
-    $(".bearForm").hide();
     newBear.slowlyDie();
-    healthCheck(newBear);
+    updateBears(newBearpen);
+    healthCheck(newBearpen);
 
     //API Stuff
     let request = new XMLHttpRequest();
@@ -39,52 +35,88 @@ $(document).ready(function(){
     request.send();
 
     const getElements = function(response) {
-      $('.bearImg').prepend('<img id="theImg" src="'+response.sprites.front_default+'" />');
+      newBear.imgLink = response.sprites.front_shiny;
+      $("#liveBearsList").html(displayBear(newBearpen));
     };
-
-
   });
 
-  $("#feedBtn").click(function(){
-    newBear.feed();
-    updateScreens(newBear);
+
+  function displayBear(bearpen){
+    let htmlToAdd = "";
+    bearpen.bearArray.forEach(function(bear) {
+      htmlToAdd += '<li><div class="displayBox" id="'+bear.id+'"><h2>'+bear.name+'</h2><div class="bearImg">'+'<img src="'+bear.imgLink+'"</img></div><h3>Sleep: <span class="scaryText" id="bearSleep'+bear.id+'"></span></h3><h3>Attention: <span class="scaryText" id="bearAttention'+bear.id+'"></span></h3><h3>Hunger: <span class="scaryText" id="bearHunger'+bear.id+'"></span></h3><div class="controls'+bear.id+'"><button type="button" class="sleepBtn" id="'+bear.id+'">Sleep</button><button type="button" class="feedBtn" id="'+bear.id+'">Feed</button><button type="button" class="attentionBtn" id="'+bear.id+'">Attention</button><button type="button" class="greetingBtn" id="'+bear.id+'">Greet</button></div><h3 class="greetingTag" id="greet'+bear.id+'"></h3></div></li>';
+    });
+    return htmlToAdd;
+  }
+
+  function updateBears(bearpen){
+    bearpen.bearArray.forEach(function(bear){
+      if ((bear.bearStarves()===true)||(bear.bearStroke()===true)||(bear.bearBored()===true)){
+        bear.alive = false;
+        $(".displayBox#"+bear.id).hide();
+      } else {
+        $("#bearSleep"+bear.id).text(bear.sleep);
+        $("#bearAttention"+bear.id).text(bear.attention);
+        $("#bearHunger"+bear.id).text(bear.hunger);
+      }
+    });
+  }
+
+  $("#liveBearsList").on("click", ".sleepBtn", function() {
+    let currentBear = newBearpen.findBear(this.id);
+    currentBear.letSleep();
+    updateBears(newBearpen);
+  });
+  $("#liveBearsList").on("click", ".feedBtn", function() {
+    let currentBear = newBearpen.findBear(this.id);
+    currentBear.feed();
+    updateBears(newBearpen);
+  });
+  $("#liveBearsList").on("click", ".attentionBtn", function() {
+    let currentBear = newBearpen.findBear(this.id);
+    currentBear.giveAttention();
+    updateBears(newBearpen);
+  });
+  $("#liveBearsList").on("click", ".greetingBtn", function() {
+    let currentBear = newBearpen.findBear(this.id);
+    $("#greet"+this.id).text("Hi my name is " + currentBear.name);
+    $(".greetingTag#greet"+this.id).show();
+    setTimeout( ()=>$(".greetingTag#greet"+this.id).hide(), 5000);
   });
 
-  $("#sleepBtn").click(function(){
-    newBear.letSleep();
-    updateScreens(newBear);
-  });
 
-  $("#attentionBtn").click(function(){
-    newBear.giveAttention();
-    updateScreens(newBear);
-  });
-
-  $("#greetingBtn").click(function(){
-    $("#greetingTag").text(newBear.sayHello()).show();
-    setTimeout(function(){
-      $("#greetingTag").hide();
-    }, 5000);
-  });
-
-  let healthCheck = (bear) => {
-    variable = setInterval(updateScreens, 1000, bear);
+  let healthCheck = (bearpen) => {
+    variable = setInterval(updateBears, 1000, bearpen);
   };
 
-  function updateScreens(bear){
-    if ((bear.bearStarves()===true)||(bear.bearStroke()===true)||(bear.bearBored()===true)){
-      deathText();
-      clearInterval(variable);
-    }
-    $("#bearSleep").text(bear.sleep);
-    $("#bearAttention").text(bear.attention);
-    $("#bearHunger").text(bear.hunger);
-  }
-
-  function deathText() {
-    $(".displayBox").hide();
-    $(".controls").hide();
-    $("#deathTag").show();
-  }
+  // function deathText() {
+  //   $(".deadBears").show();
+  //   $(".displayBox").hide();
+  //   $(".controls").hide();
+  //   $("#deathTag").show();
+  // }
 
 });
+
+
+//Old API Call ----------------------------------
+// let request = new XMLHttpRequest();
+// let randoPoke = Math.floor(Math.random() * (200 - 1) + 1);
+// const url = `http://pokeapi.co/api/v2/pokemon/${randoPoke}/`;
+//
+//
+// request.onreadystatechange = function() {
+//   if (this.readyState === 4 && this.status === 200) {
+//     const response = JSON.parse(this.responseText);
+//     getElements(response);
+//   }
+// };
+// request.open("GET", url, true);
+// request.send();
+//
+//
+// const getElements = function(response) {
+//       console.log(response.sprites.front_shiny);
+//   $('.bearImg').prepend('<img id="theImg" src="'+response.sprites.front_shiny+'" />');
+// };
+// });
