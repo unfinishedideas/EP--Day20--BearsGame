@@ -17,6 +17,8 @@ ul {
 }
 em {
   text-decoration: underline;
+  font-weight: bold;
+  color: red;
 }
 .displayBox img {
   height: 200px;
@@ -49,20 +51,9 @@ em {
 .scaryText{
   color:red;
 }
-
 .controls {
   display: none;
 }
-.bearName{
-  color: white;
-  text-shadow: 2px 2px 2px black;
-  font-variant: small-caps;
-}
-
 .greetingTag {
-  display: none;
-}
-
-#deathTag {
   display: none;
 }

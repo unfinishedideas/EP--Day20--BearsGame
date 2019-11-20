@@ -91,7 +91,7 @@ $(document).ready(function(){
     variable = setInterval(updateBears, 1000, bearpen);
   };
   function deadBears(bear){
-        $("#deadBearsList").append("<li>"+bear.name+"</li>");
+        $("#deadBearsList").append('<li class="scaryText">'+bear.name+'<img src="'+bear.imgLink+'"</img></li>');
   }
 
 });
