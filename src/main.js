@@ -22,7 +22,7 @@ $(document).ready(function(){
 
     //API Stuff
     let request = new XMLHttpRequest();
-    let randoPoke = Math.floor(Math.random() * (200 - 1) + 1);
+    let randoPoke = Math.round(Math.random() * (200 - 1) + 1);
     const url = `http://pokeapi.co/api/v2/pokemon/${randoPoke}/`;
 
     request.onreadystatechange = function() {
