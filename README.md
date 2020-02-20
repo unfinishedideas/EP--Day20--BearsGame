@@ -7,7 +7,7 @@ This site is not very attractive. But I felt it was worth showcasing due to the 
 * next run `npm run start` to start the dev server
 * If it does not open automatically navigate in your browser to __localhost:8080__
 
-If you are getting issues with npm not finding the script 'build' change the `&` to a `;` after the script is called.
+If you are getting issues with npm not finding the script 'build' change the `;` to a `&` after the script is called.
 
 ie:   `"scripts": {   
-    "start": "npm run build; webpack-dev-server --open --mode development",`
+    "start": "npm run build& webpack-dev-server --open --mode development",`
